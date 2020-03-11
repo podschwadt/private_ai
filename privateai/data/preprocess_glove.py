@@ -34,10 +34,11 @@ __NUMPY_FILE = 'data_{}_{}.npz'
 __EMBEDDING_MATRIX_FILE = 'embedding_{}_{}.npz'
 
 # make sure the correct directories exists
-if not os.path.exists( os.path.join( DATA_HOME, SAVE_DIR ) ):
-  print( 'could not find output directory. creating...' )
-  os.mkdir( os.path.join( DATA_HOME, SAVE_DIR ) )
-  print( 'created:', os.path.join( DATA_HOME, SAVE_DIR ) )
+def check_dirs():
+  if not os.path.exists( os.path.join( DATA_HOME, SAVE_DIR ) ):
+    print( 'could not find output directory. creating...' )
+    os.mkdir( os.path.join( DATA_HOME, SAVE_DIR ) )
+    print( 'created:', os.path.join( DATA_HOME, SAVE_DIR ) )
 
 
 def load_tokenizer( texts=None, num_words=MAX_WORDS ):
