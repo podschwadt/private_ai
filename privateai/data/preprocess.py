@@ -31,6 +31,16 @@ NO_REVIEWS = 1697533
 REGEX = '[^a-z]'
 
 
+def stick_everything_into_cwd():
+  """
+  Sets all the paths to empty so all files are looked for in the current directory.
+  Not recommended on local machines. but makes things easier on colab
+  """
+  global DATA_HOME
+
+  DATA_HOME = ''
+
+
 def parse_json( file ):
   """
   Parses the original json file and extracts the review text and the rating.

@@ -4,7 +4,8 @@ import pickle
 import numpy as np
 import keras
 from keras.layers import Embedding
-from preprocess import load_raw_text, DATA_HOME, load_labels
+from preprocess import load_raw_text, load_labels
+import preprocess
 
 # GLOBALS
 
@@ -13,6 +14,8 @@ MAX_WORDS = 20000
 # dimension of the embeddings
 EMBEDDING_DIM = 100
 
+# where is all our data
+DATA_HOME = preprocess.DATA_HOME
 # set this to point to the folder that contains the pretrained glove embeddings
 GLOVE_DIR = '/home/rpodschwadt1/workspace/glove/glove.6B'
 
@@ -32,6 +35,21 @@ __NUMPY_FILE = 'data_{}_{}.npz'
 # must not be used with out formating it
 # formatting is MAX_WORDS, SEQUNCE_LENGHTS
 __EMBEDDING_MATRIX_FILE = 'embedding_{}_{}.npz'
+
+
+def stick_everything_into_cwd():
+  """
+  Sets all the paths to empty so all files are looked for in the current directory.
+  Not recommended on local machines. but makes things easier on colab
+  """
+  global DATA_HOME
+  global GLOVE_DIR
+  global SAVE_DIR
+
+  DATA_HOME = ''
+  GLOVE_DIR = ''
+  SAVE_DIR = ''
+
 
 # make sure the correct directories exists
 def check_dirs():
@@ -187,3 +205,4 @@ def load_embedding_dict():
 if __name__ == '__main__':
   load_data()
   load_embedding_layer()
+
