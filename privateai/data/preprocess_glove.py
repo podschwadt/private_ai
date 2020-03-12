@@ -117,7 +117,7 @@ def load_embedding_layer( num_words=MAX_WORDS, max_sequences_length=200 ):
 
   file = os.path.join( DATA_HOME, SAVE_DIR, __EMBEDDING_MATRIX_FILE.format( num_words, max_sequences_length ) )
   if os.path.exists( file ):
-    embedding_matrix = np.load( file )
+    embedding_matrix = np.load( file, allow_pickle=True )
   else:
     print( 'Preparing embedding matrix.' )
     tokenizer = load_tokenizer( num_words=num_words )
@@ -153,7 +153,7 @@ def load_data( num_words=MAX_WORDS, max_sequences_length=200, validation_split=0
   file = os.path.join( DATA_HOME, SAVE_DIR, __NUMPY_FILE.format( num_words, max_sequences_length ) )
   if os.path.exists( file ):
     print( 'loading data from file' )
-    x = np.load( file )
+    x = np.load( file, allow_pickle=True )
   else:
     print( 'processing data' )
     seq = load_sequences( num_words=num_words )
