@@ -153,17 +153,18 @@ def load_data( num_words=MAX_WORDS, max_sequences_length=200, validation_split=0
   file = os.path.join( DATA_HOME, SAVE_DIR, __NUMPY_FILE.format( num_words, max_sequences_length ) )
   if os.path.exists( file ):
     print( 'loading data from file' )
-    x = np.load( file, allow_pickle=True )
+    f = np.load( file, allow_pickle=True )
+    x = f[ 'x' ]
+    x = f[ 'y' ]
   else:
     print( 'processing data' )
     seq = load_sequences( num_words=num_words )
     x = keras.preprocessing.sequence.pad_sequences( seq, maxlen=max_sequences_length )
     print( 'saving to file' )
-    np.savez( file, x )
-
-  y = load_labels()
-  # labels are 1-5, need to be 0-4
-  y = y - 1
+    y = load_labels()
+    # labels are 1-5, need to be 0-4
+    y = y - 1
+    np.savez_compressed( file, x=x, y=y )
 
   y = keras.utils.to_categorical( np.asarray( y ) )
   print( 'Shape of data tensor:', x.shape )
