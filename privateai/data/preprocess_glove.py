@@ -155,7 +155,7 @@ def load_data( num_words=MAX_WORDS, max_sequences_length=200, validation_split=0
     print( 'loading data from file' )
     f = np.load( file, allow_pickle=True )
     x = f[ 'x' ]
-    x = f[ 'y' ]
+    y = f[ 'y' ]
   else:
     print( 'processing data' )
     seq = load_sequences( num_words=num_words )
