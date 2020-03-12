@@ -117,7 +117,7 @@ def load_embedding_layer( num_words=MAX_WORDS, max_sequences_length=200 ):
 
   file = os.path.join( DATA_HOME, SAVE_DIR, __EMBEDDING_MATRIX_FILE.format( num_words, max_sequences_length ) )
   if os.path.exists( file ):
-    embedding_matrix = np.load( file, allow_pickle=True )
+    embedding_matrix = np.load( file, allow_pickle=True )[ 'arr_0' ]
   else:
     print( 'Preparing embedding matrix.' )
     tokenizer = load_tokenizer( num_words=num_words )
